@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="d-flex">
+{% for finch in finches %}
+    <div class="card">
+        <div class="card-image">
+            <img class="image" src="{{ finch.img }}" alt="{{ finch.name }}">
+            <span class="card-title">{{ finch.name  }}</span>
+        </div>
+        <div class="class-content">
+           <table>
+            <tbody>
+                <tr>
+                    <td>Length</td>
+                    <td>{{ finch.length }} cm</td>
+                </tr>
+                <tr>
+                    <td>Wingspan</td>
+                    <td>{{ finch.wingspan }} cm</td>
+                </tr>
+                <tr>
+                    <td>Weight</td>
+                    <td>{{ finch.weight }} grams</td>
+                </tr>
+                <tr>
+                    <td>Habitat(s)</td>
+                    <td>{% for hab in finch.habitats %} 
+                        {{hab}} <br>
+                        {% endfor %}
+                    </td>
+                </tr>
+            </tbody>
+           </table> 
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+
+{% endblock %}

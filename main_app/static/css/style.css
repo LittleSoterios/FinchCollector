@@ -1,0 +1,40 @@
+.image{
+    
+    border-radius: 50%;
+}
+body{
+    background-color:bisque;
+    color: black;
+    
+}
+
+.card{
+    width: 40vmin;
+    height: auto;
+    margin-left: 2vmin;
+    background-color: antiquewhite;
+
+
+}
+.d-flex{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.brand-logo{
+    color: black;
+}
+
+.nav-wrapper{
+    background-color: antiquewhite;
+}
+
+a{
+    color: black;
+}
+.page-footer{
+    background-color: antiquewhite;
+}
