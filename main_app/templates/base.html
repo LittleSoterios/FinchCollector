@@ -15,12 +15,13 @@
     <nav>
       <div class="nav-wrapper">
         <ul>
-          <li><a href="/" class="black-text left brand-logo">&nbsp;&nbsp;FinchCollector</a></li>
+          <li><a href="{% url 'home' %}" class="black-text left brand-logo">&nbsp;&nbsp;FinchCollector</a></li>
         </ul>
         <ul class="right">
-          <li><a class="black-text" href="/about">About</a></li>
+          <li><a class="black-text" href="{% url 'about' %}">About</a></li>
+          <li><a class="black-text" href="{% url 'finches_create' %}">Add a Finch</a></li>
 
-          <li><a class="black-text" href="/finches">View All My Finches</a></li>
+          <li><a class="black-text" href="{% url 'finches' %}">View All My Finches</a></li>
         </ul>
       </div>
     </nav>

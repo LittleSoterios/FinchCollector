@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="d-flex">
-{% for finch in finches %}
-<a href="/finches/{{finch.id}}">
+    
+
+
     <div class="card">
         <div class="card-image">
             <img class="image" src="{{ finch.img }}" alt="{{ finch.name }}">
@@ -34,10 +34,12 @@
             </tbody>
            </table> 
         </div>
+        <div class="card-action">
+            <a href="{% url 'finches_update' finch.id %}">Edit</a>
+            <a href="{% url 'finches_delete' finch.id %}">Delete</a>
+        </div>
     </div>
-</a>
-{% endfor %}
-</div>
+
 
 
 {% endblock %}
