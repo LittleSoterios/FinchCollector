@@ -1,45 +1,90 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    
 
 
-    <div class="card">
-        <div class="card-image">
-            <img class="image" src="{{ finch.img }}" alt="{{ finch.name }}">
-            <span class="card-title">{{ finch.name  }}</span>
-        </div>
-        <div class="class-content">
-           <table>
-            <tbody>
-                <tr>
-                    <td>Length</td>
-                    <td>{{ finch.length }} cm</td>
-                </tr>
-                <tr>
-                    <td>Wingspan</td>
-                    <td>{{ finch.wingspan }} cm</td>
-                </tr>
-                <tr>
-                    <td>Weight</td>
-                    <td>{{ finch.weight }} grams</td>
-                </tr>
-                <tr>
-                    <td>Habitat(s)</td>
-                    <td>{% for hab in finch.habitats %} 
-                        {{hab}} <br>
-                        {% endfor %}
-                    </td>
-                </tr>
-            </tbody>
-           </table> 
-        </div>
-        <div class="card-action">
-            <a href="{% url 'finches_update' finch.id %}">Edit</a>
-            <a href="{% url 'finches_delete' finch.id %}">Delete</a>
+<div class="row">
+    <div class="col s6">
+
+
+        <div class="card">
+            <div class="card-image">
+                <img class="image" src="{{ finch.img }}" alt="{{ finch.name }}">
+                <span class="card-title">{{ finch.name }}</span>
+            </div>
+            <div class="class-content">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Length</td>
+                            <td>{{ finch.length }} cm</td>
+                        </tr>
+                        <tr>
+                            <td>Wingspan</td>
+                            <td>{{ finch.wingspan }} cm</td>
+                        </tr>
+                        <tr>
+                            <td>Weight</td>
+                            <td>{{ finch.weight }} grams</td>
+                        </tr>
+                        <tr>
+                            <td>Habitat(s)</td>
+                            <td>{% for hab in finch.habitats %}
+                                {{hab}} <br>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-action">
+                <a href="{% url 'finches_update' finch.id %}">Edit</a>
+                <a href="{% url 'finches_delete' finch.id %}">Delete</a>
+            </div>
         </div>
     </div>
 
+    <div class="col s6">
+        <form action="{% url 'add_feeding' finch.id %}" method="POST">
+            {% csrf_token %}
+            {{ feeding_form.as_p }}
+            <input type="submit" class="btn" value="Add Feeding">
+        </form>
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Meal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for feeding in finch.feeding_set.all %}
+                <tr>
+                    <td>{{feeding.date}}</td>
+                    <td>{{feeding.get_meal_display}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
+<script>
+    const dateEl = document.getElementById('id_date');
+
+    // M is materialises global variable
+    M.Datepicker.init(dateEl, {
+        format: 'yyyy-mm-dd',
+        defaultDate: new Date(),
+        setDefaultDate: true,
+        autoClose: true
+    });
+
+    const selectEl = document.getElementById('id_meal');
+    M.FormSelect.init(selectEl);
+
+</script>
+
+</div>
 
 {% endblock %}
